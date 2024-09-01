@@ -14,8 +14,8 @@ print(mnist_df.describe())
 X = mnist_df.to_numpy()
 
 #split data into x,y
-y = X[:, -1]
-X = X[:,:-1]
+y = X[:, 2]
+X = X[:, 3:]
 
 print(y.shape)
 print(X.shape)
