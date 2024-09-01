@@ -3,4 +3,6 @@ import pandas as pd
 
 filepath = "C:\\Users\\perry\\Downloads\\MNIST_train.csv"
 
-pd.read_csv(filepath)
+mnist_df = pd.read_csv(filepath)
+
+##check size, shape, and description of data
