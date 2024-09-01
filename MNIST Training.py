@@ -9,3 +9,13 @@ mnist_df = pd.read_csv(filepath)
 print(mnist_df.shape)
 print(mnist_df.count())
 print(mnist_df.describe())
+
+#Transform the data to an array
+X = mnist_df.to_numpy()
+
+#split data into x,y
+y = X[:, -1]
+X = X[:,:-1]
+
+print(y.shape)
+print(X.shape)
