@@ -92,9 +92,15 @@ gnb = GaussBayes()
 knn = KNN()
 
 gnb.fit(X, y)
-#knn.fit(X, y)
+knn.fit(X, y)
 
-#y_PredKNN = knn.predict(X_test, 20)
+y_PredKNN = knn.predict(X_test, 20)
+y_KNN_hat = knn.predict(X, 20)
+
+y_hat = gnb.predict(X)
 y_Pred = gnb.predict(X_test)
 
-print(accuracy(y_test, y_Pred))
+print(f"Training Accuracy GnB: {y_hat * 100:.2f}%")
+print(f"Test Accuracy GnB: {y_Pred * 100:.2f}%")
+#print(f"Training Accuracy KNN: {y_KNN_hat * 100:.2f}%")
+#print (f"Test Accuracy KNN: {y_PredKNN * 100:.2f}%")
