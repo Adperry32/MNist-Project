@@ -21,3 +21,30 @@ X = X[:, 1:]
 
 print(y.shape)
 print(X.shape)
+
+#building non-naive GB Classifer
+class GaussBayes():
+    
+    def fit(self,X,y,epsilon=1e-3):
+        self.likelihoods = dict()
+        self.priors = dict()
+        self.K = set(y.astype(int))
+        
+        for k in self.K:
+            X_k = X[y==k, :]
+            N_k, D = X_k.shape
+            mu_k = X_k.mean(axis = 0)
+            cov_k = (1 / (N_k-1))*np.matmul((X_k - mu_k).T,X_k-mu_k)+epsilon*np.identity(D)
+            
+            self.likelihoods[k] = {"mean":mu_k, "cov":cov_k}
+            self.priors[k] = len(X_k) / len(X)
+            
+    def predict(self, X):
+        N, D = X.shape
+        P_hat = np.zeros((N, len(self.K)))
+        
+        #make predictions within loop
+        for k, l in self.likelihoods.items():
+            P_hat[:, k] = mvn.logpdf(X, l["mean"], l["cov"])+np.log(self.priors[k])
+        
+        return P_hat.argmax(axis =1)
