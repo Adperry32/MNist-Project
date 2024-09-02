@@ -1,5 +1,7 @@
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
+from scipy.stats import multivariate_normal as mvn
 
 filepath = "C:\\Users\\perry\\Downloads\\MNIST_train.csv"
 
@@ -14,8 +16,8 @@ print(mnist_df.describe())
 X = mnist_df.to_numpy()
 
 #split data into x,y
-y = X[:, 2]
-X = X[:, 3:]
+y = X[:, 0]
+X = X[:, 1:]
 
 print(y.shape)
 print(X.shape)
