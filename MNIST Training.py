@@ -29,7 +29,12 @@ X_test = X_test[:, 3:]
 
 print(y.shape)
 print(X.shape)
+#print(y_test.shape)
+#print(X_test.shape)
 
+#needed to normalize the data to [0, 1] since there is an image.
+X = X / 255.0
+X_test = X_test / 255.0
 
 
 #function to check accuracy of models performance
