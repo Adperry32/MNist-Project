@@ -44,7 +44,7 @@ def accuracy(y, y_hat):
     #building non-naive GB Classifer
 class GaussBayes():
     
-    def fit(self,X,y,epsilon=1e-3):
+    def fit(self,X,y,epsilon=1e-2):
         self.likelihoods = dict()
         self.priors = dict()
         self.K = set(y.astype(int))
@@ -75,7 +75,7 @@ class KNN():
         self.X=X
         self.y=y
         
-    def predict(self, X, K, epsilon=1e-3):
+    def predict(self, X, K, epsilon=1e-2):
         N = len(X)
         y_hat = np.zeros(N)
         
