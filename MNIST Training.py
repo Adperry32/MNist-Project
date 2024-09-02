@@ -16,13 +16,21 @@ print(mnist_df.describe())
 
 #Transform the data to an array
 X = mnist_df.to_numpy()
+X_test = mnist_test_df.to_numpy()
+
 
 #split data into x,y
 y = X[:, 2]
 X = X[:, 3:]
 
+#split test data into x,y
+y_test = X_test[:, 2]
+X_test = X_test[:, 3:]
+
 print(y.shape)
 print(X.shape)
+
+
 
 #function to check accuracy of models performance
 def accuracy(y, y_hat):
@@ -74,7 +82,14 @@ class KNN():
         
         return y_hat
     
+#instantiate the classes 
 gnb = GaussBayes()
+knn = KNN()
 
 gnb.fit(X, y)
-            
+#knn.fit(X, y)
+
+#y_PredKNN = knn.predict(X_test, 20)
+y_Pred = gnb.predict(X_test)
+
+print(accuracy(y_test, y_Pred))
