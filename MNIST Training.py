@@ -94,13 +94,34 @@ knn = KNN()
 gnb.fit(X, y)
 knn.fit(X, y)
 
-y_PredKNN = knn.predict(X_test, 20)
-y_KNN_hat = knn.predict(X, 20)
+#y_PredKNN = knn.predict(X_test, 20)
+#y_KNN_hat = knn.predict(X, 20)
 
 y_hat = gnb.predict(X)
 y_Pred = gnb.predict(X_test)
 
-print(f"Training Accuracy GnB: {y_hat * 100:.2f}%")
-print(f"Test Accuracy GnB: {y_Pred * 100:.2f}%")
+#variables to hold accuracy score 
+train_accuracy = accuracy(y, y_hat)
+test_accuracy = accuracy(y_test, y_Pred)
+
+
+#print out individual scores
+print(f"Training Accuracy GnB: {train_accuracy * 100:.2f}%")
+print(f"Test Accuracy GnB: {test_accuracy * 100:.2f}%")
 #print(f"Training Accuracy KNN: {y_KNN_hat * 100:.2f}%")
 #print (f"Test Accuracy KNN: {y_PredKNN * 100:.2f}%")
+
+#present a demo of both the actual data and predicted data from the model side by side
+demo = np.random.choice(X_test.shape[0], 5 , replace = False)
+demo_images = X_test[demo]
+demo_labels = y_test[demo]
+
+p_Hat_labels = gnb.predict(demo_images)
+
+
+#loop to display images and predictions 
+for i in range(5):
+    plt.imshow(demo_images[i].reshape(28,28), cmap='gray')
+    plt.title(f'Actual: {int(demo_labels[i])}, Predicted: {p_Hat_labels[i]}')
+    plt.axis('off')
+    plt.show()
