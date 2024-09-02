@@ -4,8 +4,10 @@ import matplotlib.pyplot as plt
 from scipy.stats import multivariate_normal as mvn
 
 filepath = "C:\\Users\\perry\\Downloads\\MNIST_train.csv"
+file_test ="C:\\Users\\perry\\Downloads\\MNIST_test.csv"
 
 mnist_df = pd.read_csv(filepath)
+mnist_test_df = pd.read_csv(file_test)
 
 ##check size, shape, and description of data
 print(mnist_df.shape)
@@ -51,4 +53,9 @@ class GaussBayes():
     
     def accuracy(y, y_hat):
         return np.mean(y == y_hat)
+    
+
+gnb = GaussBayes()
+
+gnb.fit(X, y)
             
