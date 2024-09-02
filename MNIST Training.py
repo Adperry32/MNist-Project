@@ -24,6 +24,10 @@ X = X[:, 3:]
 print(y.shape)
 print(X.shape)
 
+#function to check accuracy of models performance
+def accuracy(y, y_hat):
+    return np.mean(y == y_hat)
+
     #building non-naive GB Classifer
 class GaussBayes():
     
@@ -51,10 +55,25 @@ class GaussBayes():
         
         return P_hat.argmax(axis =1)
     
-    def accuracy(y, y_hat):
-        return np.mean(y == y_hat)
-    
 
+#building of KNN classifier to check accuracy verse the GB  
+class KNN():
+    def fit(self, X,y):
+        self.X=X
+        self.y=y
+        
+    def predict(self, X, K, epsilon=1e-3):
+        N = len(X)
+        y_hat = np.zeros(N)
+        
+        for i in range(N):
+            dist = np.sum((self.X-X[i])**2, axis =1)
+            index = np.argsort(dist)[:K]
+            gamma_k = 1/(np.sqrt(dist[index]+epsilon))
+            y_hat = np.bincount(self.y[index],weights = gamma_k).argmax()
+        
+        return y_hat
+    
 gnb = GaussBayes()
 
 gnb.fit(X, y)
