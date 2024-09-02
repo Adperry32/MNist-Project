@@ -48,3 +48,8 @@ class GaussBayes():
             P_hat[:, k] = mvn.logpdf(X, l["mean"], l["cov"])+np.log(self.priors[k])
         
         return P_hat.argmax(axis =1)
+    
+    def accuracy(y, y_hat):
+        return np.mean(y == y_hat)
+    
+    
